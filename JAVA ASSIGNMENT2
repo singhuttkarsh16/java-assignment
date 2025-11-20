@@ -1,0 +1,306 @@
+8-
+import java.util.Scanner;
+
+public class AsciiCodeGenerator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String input = sc.nextLine();
+
+        StringBuilder code = new StringBuilder();
+
+        for (char c : input.toCharArray()) {
+            code.append((int) c);  
+        }
+        System.out.println("Numeric Code: " + code.toString());
+    }
+}
+
+9-
+import java.util.Scanner;
+
+public class TransformationCode {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            int ascii = (int) input.charAt(i);
+            int transformed = ascii + (i + 1); 
+            result.append(transformed);
+        }
+        System.out.println("Derived Code: " + result.toString());
+    }
+}
+
+10-
+import java.util.Scanner;
+
+public class LargeNumberAddition {
+
+    public static String addLargeNumbers(String num1, String num2) {
+
+        int i = num1.length() - 1;
+        int j = num2.length() - 1;
+
+        StringBuilder result = new StringBuilder();
+        int carry = 0;
+
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int digit1 = (i >= 0) ? num1.charAt(i) - '0' : 0;
+            int digit2 = (j >= 0) ? num2.charAt(j) - '0' : 0;
+
+            int sum = digit1 + digit2 + carry;
+
+            result.append(sum % 10);
+            carry = sum / 10;
+
+            i--;
+            j--;
+        }
+
+        return result.reverse().toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first large number: ");
+        String num1 = sc.nextLine();
+
+        System.out.print("Enter second large number: ");
+        String num2 = sc.nextLine();
+
+        String sum = addLargeNumbers(num1, num2);
+
+        System.out.println("Sum = " + sum);
+    }
+}
+
+11-
+import java.util.*;
+
+public class EncodeDecodeArray {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+
+        System.out.print("Enter key (shift value): ");
+        int key = sc.nextInt();
+
+        int[] encoded = new int[n];
+        int[] decoded = new int[n];
+
+        // Encoding
+        for (int i = 0; i < n; i++)
+            encoded[i] = arr[i] + key;
+
+        // Decoding
+        for (int i = 0; i < n; i++)
+            decoded[i] = encoded[i] - key;
+
+        System.out.println("Encoded: " + Arrays.toString(encoded));
+        System.out.println("Decoded: " + Arrays.toString(decoded));
+    }
+}
+
+12-
+import java.util.*;
+
+public class DecreasingSequenceCheck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+
+        boolean isDecreasing = true;
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i] >= arr[i - 1]) {
+                isDecreasing = false;
+                break;
+            }
+        }
+
+        if (isDecreasing)
+            System.out.println("Array is in decreasing order.");
+        else
+            System.out.println("Array is NOT in decreasing order.");
+    }
+}
+
+13-
+import java.util.*;
+
+public class MostFrequentDigit {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+
+        int[] freq = new int[10];
+
+        for (int num : arr) {
+            String s = String.valueOf(num);
+            for (char c : s.toCharArray()) {
+                freq[c - '0']++;
+            }
+        }
+
+        int maxDigit = 0, maxCount = 0;
+
+        for (int i = 0; i < 10; i++) {
+            if (freq[i] > maxCount) {
+                maxCount = freq[i];
+                maxDigit = i;
+            }
+        }
+
+        System.out.println("Most frequent digit: " + maxDigit);
+    }
+}
+
+14-
+import java.util.*;
+
+public class SumOfPowers {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+
+        System.out.print("Enter power: ");
+        int p = sc.nextInt();
+
+        int sum = 0;
+
+        while (num > 0) {
+            int digit = num % 10;
+            sum += Math.pow(digit, p);
+            num /= 10;
+        }
+
+        System.out.println("Sum of powers = " + sum);
+    }
+}
+
+15-
+import java.util.*;
+
+public class CyclicSumOfDigits {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        String num = sc.next();
+
+        int totalSum = 0;
+        int n = num.length();
+
+        String temp = num;
+
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            for (char c : temp.toCharArray())
+                sum += c - '0';
+
+            totalSum += sum;
+
+            // rotate string
+            temp = temp.substring(1) + temp.charAt(0);
+        }
+
+        System.out.println("Total Cyclic Sum = " + totalSum);
+    }
+}
+
+16-
+import java.util.*;
+
+public class PossibleWords {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter available letters: ");
+        String letters = sc.next();
+        int n = sc.nextInt();
+
+        String[] words = new String[n];
+        System.out.println("Enter words:");
+        for (int i = 0; i < n; i++) words[i] = sc.next();
+
+        System.out.println("Possible words:");
+
+        for (String word : words) {
+            if (canForm(word, letters))
+                System.out.println(word);
+        }
+    }
+
+    static boolean canForm(String word, String letters) {
+        int[] freq = new int[26];
+
+        for (char c : letters.toCharArray())
+            freq[c - 'a']++;
+
+        for (char c : word.toCharArray()) {
+            if (freq[c - 'a'] == 0)
+                return false;
+            freq[c - 'a']--;
+        }
+        return true;
+    }
+}
+
+17-
+import java.util.*;
+
+public class EncodeThreeStrings {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter string 1: ");
+        String s1 = sc.next();
+        System.out.print("Enter string 2: ");
+        String s2 = sc.next();
+        System.out.print("Enter string 3: ");
+        String s3 = sc.next();
+
+        
+        StringBuilder part1 = new StringBuilder();
+        for (int i = 0; i < s1.length(); i += 2)
+            part1.append(s1.charAt(i));
+
+        
+        String part2 = new StringBuilder(s2).reverse().toString();
+
+        
+        StringBuilder part3 = new StringBuilder();
+        for (char c : s3.toCharArray())
+            part3.append((int) c);
+
+        String encoded = part1.toString() + part2 + part3.toString();
+
+        System.out.println("Encoded Output: " + encoded);
+    }
+}
+
+
